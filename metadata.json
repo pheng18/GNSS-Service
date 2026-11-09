@@ -1,0 +1,8 @@
+{
+  "name": "UniqTek Technical Services",
+  "description": "ລະບົບຈັດການບໍລິການສ້ອມແປງອຸປະກອນ ແລະ ສຳຫຼວດວັດແທກ ບໍລິສັດ ຢູນິກເທັກ ຈຳກັດ (UniqTek Co., Ltd) ພ້ອມສະຫຼຸບລາຍເດືອນ, ສະແດງກຣາຟວິເຄາະ ແລະ ເກັບຂໍ້ມູນໃນ Firebase",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

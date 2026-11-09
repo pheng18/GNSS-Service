@@ -1,0 +1,8 @@
+{
+  "name": "uniqtek-technical-services",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "echo 'Android build ready. Export or build APK in settings.'",
+    "dev": "echo 'Android project ready. Please export or build APK in settings.'"
+  }
+}
