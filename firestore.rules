@@ -1,0 +1,85 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && (
+        request.auth.token.email == 'PhengBMCY18@gmail.com' ||
+        request.auth.token.email == 'admin@uniqtek.la'
+      );
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Repairs
+    match /repairs/{repairId} {
+      allow read: if true;
+      allow write: if isSignedIn() || isValidId(repairId);
+    }
+
+    // Projects
+    match /projects/{projectId} {
+      allow read: if true;
+      allow write: if isSignedIn() || isValidId(projectId);
+    }
+
+    // CORS Stations
+    match /cors_stations/{stationId} {
+      allow read: if true;
+      allow write: if isSignedIn() || isValidId(stationId);
+    }
+
+    // Equipment
+    match /equipment/{equipmentId} {
+      allow read: if true;
+      allow write: if isSignedIn() || isValidId(equipmentId);
+    }
+
+    // Quotations
+    match /quotations/{quotationId} {
+      allow read: if true;
+      allow write: if isSignedIn() || isValidId(quotationId);
+    }
+
+    // Employees / Technicians
+    match /employees/{employeeId} {
+      allow read: if true;
+      allow write: if isSignedIn() || isValidId(employeeId);
+    }
+
+    // Users Database (Registered Users & Real-Time Presence)
+    match /users/{userId} {
+      allow read: if true;
+      allow write: if isSignedIn() || isValidId(userId);
+    }
+
+    // Activity Logs (Real-Time Audit Trail)
+    match /activity_logs/{logId} {
+      allow read: if true;
+      allow write: if isSignedIn() || isValidId(logId);
+    }
+
+    // Internal notes
+    match /internal_notes/{noteId} {
+      allow read: if true;
+      allow write: if isSignedIn() || isValidId(noteId);
+    }
+
+    // System probe / connection test
+    match /system/{docId} {
+      allow read: if true;
+      allow write: if isSignedIn() || isValidId(docId);
+    }
+  }
+}
